@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\.codex\\hooks\\post-html-validation.ps1",
+            "timeout": 30,
+            "statusMessage": "Validating index.html"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .\\.codex\\hooks\\stop-test-and-commit.ps1",
+            "timeout": 120,
+            "statusMessage": "Testing changed files and committing"
+          }
+        ]
+      }
+    ]
+  }
+}
